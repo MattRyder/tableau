@@ -3,22 +3,18 @@ module Tableau
 
     attr_accessor :id, :modules
 
-    def defaults
-      def_opts = { modules: Array.new, id: nil }
-    end
-
     def initialize(options = {})
-      defaults.merge!(options)
+      @id = options[:id] || ''
+      @modules = options[:modules] || Array.new
     end
-
-    def add_modules(modules)
-      modules.each{_|m| add_module(m) }
-    end
-
 
     def add_module(string_or_file)
       @module = Tableau::Parser.new(string_or_file).parse_module
       @modules << @module if @module
+    end
+
+    def add_modules(modules)
+      modules.each{ |m| add_module(m) }
     end
 
     # HTML5 representation of the timetable

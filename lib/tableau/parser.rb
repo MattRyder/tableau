@@ -75,7 +75,7 @@ module Tableau
         data = class_element.xpath('table/tr/td//text()')
         raise "Misformed cell for #{module_id}" if data.count != 5
       rescue Exception => e
-        p e.message
+        p "*** EXCEPTION: #{e.message}"
         p 'Data Parsed:', data
         return nil
       end

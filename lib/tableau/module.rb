@@ -19,6 +19,16 @@ module Tableau
       @classes << new_class
     end
 
+    def classes_for_day(day)
+      days_classes = Array.new
+
+      @classes.each do |c|
+        days_classes << c if c.day == day
+      end
+
+      days_classes
+    end
+
     def validate_id(id)
       /^CE[0-9]{5}-[0-9]$/ =~ id
     end
