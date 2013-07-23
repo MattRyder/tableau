@@ -19,6 +19,18 @@ module Tableau
       modules.each{ |m| add_module(m) }
     end
 
+    def remove_class(rem_class)
+      mod_for_class = nil
+
+      @modules.each do |m|
+        if m.name == rem_class.name
+          m.classes.delete(rem_class)
+          break
+        end
+      end
+
+    end
+
     def conflicts
       conflicts = Array.new
 

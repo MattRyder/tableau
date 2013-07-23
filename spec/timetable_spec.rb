@@ -23,6 +23,7 @@ describe 'Timetable' do
     before do
       modules = ['CE70046-4', 'CE70031-4']
       @timetable = Tableau::Timetable.new(module_codes: modules)
+      @conflicts = @timetable.conflicts
     end
 
     it "should have 2 modules" do
@@ -40,9 +41,12 @@ describe 'Timetable' do
     end
 
     it "should return one conflict" do
-      conflicts = @timetable.conflicts
-      conflicts.count.should eq(1)
+      @conflicts.count.should eq(1)
     end
 
+    it "should resolve conflicts" do
+      @timetable.remove_class(@conflicts[0].first)
+      @timetable.conflicts.count.should eq(0)
+    end
   end
 end
