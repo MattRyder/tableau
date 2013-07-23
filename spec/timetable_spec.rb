@@ -21,22 +21,27 @@ describe 'Timetable' do
   context "with conflicting modules" do
 
     before do
-      modules = ['CE00429-5', 'CE00758-5']
-      @timetable = Tableau::Timetable.new.add_modules(modules)
+      modules = ['CE70046-4', 'CE70031-4']
+      @timetable = Tableau::Timetable.new(module_codes: modules)
     end
 
     it "should have 2 modules" do
       @timetable.modules.count.should eq(2)
     end
 
-    it "should have 3 classes" do
+    it "should have 2 classes" do
       class_count = 0
 
       @timetable.modules.each do |mod|
         class_count += mod.classes.count
       end
 
-      class_count.should eq(3)
+      class_count.should eq(2)
+    end
+
+    it "should return one conflict" do
+      conflicts = @timetable.conflicts
+      conflicts.count.should eq(1)
     end
 
   end

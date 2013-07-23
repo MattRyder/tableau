@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'tableau/timetable'
 require 'tableau/module'
+require 'tableau/class'
 require 'tableau/uribuilder'
 
 module Tableau
@@ -33,6 +34,8 @@ module Tableau
 
       mod = Tableau::Module.new(mod_id, name: mod_name)
 
+      #p "Parse_Module: #{mod.inspect}"
+
       #Get the Classes for this Module, drop the time row
       tt_rows = @raw_timetable.xpath(@@CLASS_INFO_XPATH)
       tt_rows.delete(tt_rows.first)
@@ -60,8 +63,6 @@ module Tableau
         end
 
         @day += 1
-
-
       end
 
       mod #return the module to the caller
@@ -75,8 +76,8 @@ module Tableau
         data = class_element.xpath('table/tr/td//text()')
         raise "Misformed cell for #{module_id}" if data.count != 5
       rescue Exception => e
-        p "*** EXCEPTION: #{e.message}"
-        p 'Data Parsed:', data
+        p "*** EXCEPTION: #{e.message}", "Data Parsed:", data
+        p "Backtrace: #{e.backtrace}"
         return nil
       end
 
@@ -97,9 +98,7 @@ module Tableau
 
     # Increments the @time by 15 minute intervals
     def inc_time(intervals)
-      intervals.to_i.times do
-        @time += 900
-      end
+      intervals.to_i.times { @time += 900 }
     end
 
   end

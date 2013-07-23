@@ -26,7 +26,7 @@ module Tableau
         days_classes << c if c.day == day
       end
 
-      days_classes
+      days_classes.count > 0 ? days_classes : nil
     end
 
     def validate_id(id)
