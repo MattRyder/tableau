@@ -43,6 +43,30 @@ describe 'Parser' do
     end
   end
 
+  context "using Module ID CE00341-5" do
+
+    before do
+      @module = Tableau::Parser.new('CE00341-5', 2).parse_module
+      @classes = @module.classes
+    end
+
+    it "should return 3 classes" do
+      @classes.count.should eq(3)
+    end
+
+    it "should have a class with the correct attributes" do
+      @classes.first.tutor.should eq("Sharp B")
+      @classes.first.location.should eq("C346")
+      @classes.first.type.should eq("Lec")
+      @classes.first.name.should eq("AI Methods")
+    end
+
+    it "should have a class at the correct time" do
+      @classes.first.day.should eq(2)
+      @classes.first.time.should == Time.new(2013, 1, 1, 10, 0, 0)
+    end
+  end
+
   context "using Module ID CE00871-6" do
 
     before do

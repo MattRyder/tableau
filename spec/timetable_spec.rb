@@ -12,9 +12,34 @@ describe 'Timetable' do
     it "should return a new instance" do
       @timetable.should be_an_instance_of Tableau::Timetable
     end
+  end
 
-    it "should return the timetable as HTML" do
-      @timetable.to_html.should_not == nil
+  context "with one module" do
+
+    before do
+      modules = [['CE00341-5', 2]]
+      @timetable = Tableau::Timetable.new(module_codes: modules)
+      @firstclass = @timetable.modules.first.classes.first
+    end
+
+    it "should have 3 classes" do
+      class_count = 0
+
+      @timetable.modules.each do |mod|
+        class_count += mod.classes.count
+      end
+    end
+
+    it "should have a class with the correct attributes" do
+      @firstclass.tutor.should eq("Sharp B")
+      @firstclass.location.should eq("C346")
+      @firstclass.type.should eq("Lec")
+      @firstclass.name.should eq("AI Methods")
+    end
+
+    it "should have a class at the correct time" do
+      @firstclass.day.should eq(2)
+      @firstclass.time.should == Time.new(2013, 1, 1, 10, 0, 0)
     end
   end
 
