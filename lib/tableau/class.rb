@@ -2,7 +2,7 @@ module Tableau
   class Class
 
     attr_accessor :type, :location, :name, :tutor,
-                  :day, :time, :intervals
+                  :day, :time, :intervals, :weeks
 
     def defaults
       def_opts = {
@@ -19,6 +19,7 @@ module Tableau
     def initialize(day, time, options = {})
       @day = day
       @time = time
+      @weeks = Array.new
       defaults.merge!(options)
     end
 

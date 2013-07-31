@@ -92,4 +92,42 @@ describe 'Parser' do
     end
   end
 
+  # has two timetables with alternating classes
+  context "using Module ID CE00748-3 (split week classes)" do
+
+    before do
+      @module = Tableau::Parser.new('CE00748-3', 2).parse_module
+      @classes = @module.classes
+    end
+
+    it "should return 4 class" do
+      @classes.count.should eq(4)
+    end
+
+    it "should have a class with the correct attributes" do
+      @classes[1].tutor.should eq("Martyn A")
+      @classes[1].location.should eq("S426")
+      @classes[1].type.should eq("Tut")
+      @classes[1].name.should eq("Principles of Materials")
+    end
+
+    it "should have the class valid for the right weeks on first timetable" do
+      valid_weeks = [28, 29, 31, 32, 34, 35, 37, 38, 39]
+
+      @classes[1].weeks.each do |week|
+        valid_weeks.include?(week).should eq(true)
+      end
+    end
+
+    it "should have a class at the correct time" do
+      @classes.first.day.should eq(3)
+      @classes.first.time.should == Time.new(2013, 1, 1, 9, 0, 0)
+    end
+
+    it "should have the class with the right weeks on the second timetable" do
+      valid_weeks = [30, 33, 36]
+      @classes[3].weeks.each { |week| valid_weeks.include?(week).should eq(true) }
+    end
+  end
+
 end
