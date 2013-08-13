@@ -22,7 +22,9 @@ describe 'Parser' do
   context "using Module ID CE00758-5" do
 
     before do
-      @module = Tableau::Parser.new('CE00758-5', 2).parse_module
+      @parser = Tableau::Parser.new('CE00758-5', 2)
+      @module = @parser.parse_module
+      @information = @parser.get_info
       @classes = @module.classes
     end
 
@@ -41,12 +43,19 @@ describe 'Parser' do
       @classes.first.day.should eq(3)
       @classes.first.time.should == Time.new(2013, 1, 1, 11, 0, 0)
     end
+
+    it "should return the correct module information" do
+      @information[:name].should eq('Film Technology 2')
+      @information[:code].should eq('CE00758-5')
+    end
   end
 
   context "using Module ID CE00341-5" do
 
     before do
-      @module = Tableau::Parser.new('CE00341-5', 2).parse_module
+      @parser = Tableau::Parser.new('CE00341-5', 2)
+      @information = @parser.get_info
+      @module = @parser.parse_module
       @classes = @module.classes
     end
 
@@ -65,12 +74,19 @@ describe 'Parser' do
       @classes.first.day.should eq(2)
       @classes.first.time.should == Time.new(2013, 1, 1, 10, 0, 0)
     end
+
+    it "should return the correct module information" do
+      @information[:name].should eq('AI Methods')
+      @information[:code].should eq('CE00341-5')
+    end
   end
 
   context "using Module ID CE00871-6" do
 
     before do
-      @module = Tableau::Parser.new('CE00871-6', 2).parse_module
+      @parser = Tableau::Parser.new('CE00871-6', 2)
+      @module = @parser.parse_module
+      @information = @parser.get_info
       @classes = @module.classes
     end
 
@@ -90,13 +106,20 @@ describe 'Parser' do
         end
       end
     end
+
+    it "should return the correct module information" do
+      @information[:name].should eq('Safety Critical and Embedded Systems')
+      @information[:code].should eq('CE00871-6')
+    end
   end
 
   # has two timetables with alternating classes
   context "using Module ID CE00748-3 (split week classes)" do
 
     before do
-      @module = Tableau::Parser.new('CE00748-3', 2).parse_module
+      @parser = Tableau::Parser.new('CE00748-3', 2)
+      @module = @parser.parse_module
+      @information = @parser.get_info
       @classes = @module.classes
     end
 
@@ -127,6 +150,11 @@ describe 'Parser' do
     it "should have the class with the right weeks on the second timetable" do
       valid_weeks = [30, 33, 36]
       @classes[3].weeks.each { |week| valid_weeks.include?(week).should eq(true) }
+    end
+
+    it "should return the correct module information" do
+      @information[:name].should eq('Principles of Materials')
+      @information[:code].should eq('CE00748-3')
     end
   end
 

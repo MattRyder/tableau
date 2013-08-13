@@ -28,6 +28,17 @@ module Tableau
       @day = 0
     end
 
+    def get_info
+      raw_info = @raw_timetable.xpath(@@COURSE_DESCRIPTION_XPATH).to_html
+      mod_id = @@MODULE_ID_REGEX.match(raw_info).to_s
+      mod_name = raw_info.gsub(mod_id, '')
+
+      return {
+        name: mod_name,
+        code: mod_id
+      }
+    end
+
     def parse_module
       raise "No timetable loaded!" unless @raw_timetable
 

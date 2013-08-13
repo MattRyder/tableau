@@ -5,5 +5,10 @@ module Tableau
 			Tableau::Timetable.new(options)
 		end
 
+    def module_info(module_code, semester)
+      parser = Tableau::Timetable(module_code, semester)
+      return parser.get_info
+    end
+
 	end
 end
