@@ -6,7 +6,7 @@ module Tableau
 		end
 
     def module_info(module_code, semester)
-      parser = Tableau::Timetable(module_code, semester)
+      parser = Tableau::Timetable.new(module_code, semester)
       return parser.get_info
     end
 
