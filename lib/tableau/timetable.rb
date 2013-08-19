@@ -29,8 +29,6 @@ module Tableau
       nil
     end
 
-
-
     def add_module(string_or_file, semester)
       @module = Tableau::Parser.new(string_or_file, semester).parse_module
       @modules << @module if @module

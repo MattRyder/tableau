@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 require 'tableau/timetable'
 require 'tableau/module'
 require 'tableau/class'
