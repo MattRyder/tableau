@@ -9,7 +9,7 @@ describe 'TableBuilder' do
 
   before do
     modules = [['CE70091-4', 2], ['CE00341-5', 2], ['CE20035-4', 2]]
-    timetable = Tableau::Timetable.new(id: 'r004581a', module_codes: modules)
+    timetable = Tableau::Timetable.new(id: 'My Timetable', module_codes: modules)
     @tablebuilder = Tableau::TableBuilder.new(timetable)
   end
 

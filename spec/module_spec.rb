@@ -25,7 +25,21 @@ describe 'Module' do
     it "should return the correct Module Name" do
       @module.name.should eq('Testing Rails Applications with RSpec')
     end
-
   end
+
+  context "when accessing data attributes" do
+    before do
+      @module = Tableau::Parser.new('CE00952-5', 2).parse_module
+    end
+
+    it "should have an earliest class of 9AM" do
+      @module.earliest_class.time.should eq(Time.new(2013, 1, 1, 9, 0, 0))
+    end
+
+    it "should have a latest class of 4PM" do
+      @module.latest_class.time.should eq(Time.new(2013, 1, 1, 16, 0, 0))
+    end
+  end
+
 
 end

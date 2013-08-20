@@ -1,16 +1,13 @@
 require 'json'
 require 'tableau/timetable'
 require 'tableau/parser'
+require 'tableau/tablebuilder'
 
 module Tableau
 	class << self
 
-		def create(option = {})
-			Tableau::Timetable.new(options)
-		end
-
-    def generate(module_codes)
-      timetable = Tableau::Timetable.new(modules: module_codes)
+    def generate(table_id, module_codes, semester)
+      timetable = Tableau::Timetable.new(table_id, module_codes, semester)
       builder = Tableau::TableBuilder.new(timetable)
       builder.to_html
     end

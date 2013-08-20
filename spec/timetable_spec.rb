@@ -6,7 +6,7 @@ describe 'Timetable' do
   context "without modules" do
 
     before do
-      @timetable = Tableau::Timetable.new
+      @timetable = Tableau::Timetable.new("Test Timetable")
     end
 
     it "should return a new instance" do
@@ -17,8 +17,8 @@ describe 'Timetable' do
   context "with one module" do
 
     before do
-      modules = [['CE00341-5', 2]]
-      @timetable = Tableau::Timetable.new(module_codes: modules)
+      modules = ['CE00341-5']
+      @timetable = Tableau::Timetable.new("Test Timetable", modules, 2)
       @firstclass = @timetable.modules.first.classes.first
     end
 
@@ -47,7 +47,7 @@ describe 'Timetable' do
 
     before do
       modules = ['CE70046-4', 'CE70031-4']
-      @timetable = Tableau::Timetable.new(module_codes: modules)
+      @timetable = Tableau::Timetable.new("Test Timetable", modules, 2)
       @conflicts = @timetable.conflicts
     end
 
