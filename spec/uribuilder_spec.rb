@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'tableau/uribuilder'
 
 describe 'UriBuilder' do
 

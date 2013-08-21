@@ -19,7 +19,7 @@ module Tableau
 
     # Returns an array of all the classes for the day
     def classes_for_day(day)
-      days_classes = Array.new
+      days_classes = Tableau::ClassArray.new
       @classes.each { |c| days_classes << c if c.day == day }
       days_classes.count > 0 ? days_classes : nil
     end

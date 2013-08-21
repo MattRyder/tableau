@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'tableau/parser'
 
 describe 'Timetable' do
 

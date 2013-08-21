@@ -8,7 +8,16 @@ Spork.prefork do
   require File.expand_path("../dummy/config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'benchmark'
+
   require 'tableau'
+  require 'tableau/class'
+  require 'tableau/classarray'
+  require 'tableau/module'
+  require 'tableau/parser'
+  require 'tableau/tablebuilder'
+  require 'tableau/timetable'
+  require 'tableau/uribuilder'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.

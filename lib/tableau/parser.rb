@@ -4,6 +4,7 @@ require 'tableau/timetable'
 require 'tableau/module'
 require 'tableau/class'
 require 'tableau/uribuilder'
+require 'tableau/classarray'
 
 module Tableau
   class Parser
@@ -69,7 +70,7 @@ module Tableau
 
     def parse_table(module_id, table_rows)
       table_rows.delete(table_rows.first)
-      classes = Array.new
+      classes = Tableau::ClassArray.new
       @day = 0
 
       table_rows.each do |row|

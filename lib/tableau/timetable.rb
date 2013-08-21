@@ -33,7 +33,7 @@ module Tableau
 
     # Returns an array of the given day's classes
     def classes_for_day(day)
-      classes = Array.new
+      classes = Tableau::ClassArray.new
 
       @modules.each do |mod|
         cfd = mod.classes_for_day(day)
@@ -50,9 +50,29 @@ module Tableau
       nil
     end
 
+    # Returns the earliest class on the timetable
+    def earliest_class
+      earliest_classes = Tableau::ClassArray.new
+      @modules.each { |m| earliest_classes << m.earliest_class }
+
+      earliest = earliest_classes.first
+      earliest_classes.each { |c| earliest = c if c.time < earliest.time }
+      earliest
+    end
+
+    # Returns the latest class on the timetable
+    def latest_class
+      latest_classes = Tableau::ClassArray.new
+      @modules.each { |m| latest_classes << m.latest_class }
+
+      latest = latest_classes.first
+      latest_classes.each { |c| latest = c if c.time > latest.time }
+      latest
+    end
+
     # Returns an array of time conflicts found in the timetable
     def conflicts
-      conflicts = Array.new
+      conflicts = Tableau::ClassArray.new
 
       (0..4).each do |day|
         days_classes = self.classes_for_day(day)

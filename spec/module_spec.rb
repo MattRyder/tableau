@@ -1,7 +1,4 @@
 require 'spec_helper'
-require 'tableau/parser'
-require 'tableau/module'
-require 'tableau/class'
 
 describe 'Module' do
 

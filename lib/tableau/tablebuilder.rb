@@ -35,6 +35,7 @@ module Tableau
 
     #time > th {
       font-weight: lighter;
+      border-left: 1px solid #{@css[:border_color]};
     }
 
     .dh {
@@ -54,12 +55,12 @@ module Tableau
     }
     end
 
-    def day_row(day, end_time = nil)
+    def day_row(day, classes, end_time = nil)
+      days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
       time = Time.new(2013, 1, 1, 9, 0 , 0)
       end_time ||= Time.new(2013, 1, 1, 21, 0, 0)
 
       day_row = %Q{<td class="dh">#{days[day]}</td>}
-      classes = @timetable.classes_for_day(day)
 
       if !classes || classes.count == 0
         while time < end_time
@@ -71,7 +72,7 @@ module Tableau
           class_at_time = @timetable.class_for_time(day, time)
           if class_at_time
             day_row += make_class(class_at_time)
-            time += (900 * class_for_time.intervals)
+            time += (900 * class_at_time.intervals)
           else
             day_row += "<td></td>"
             time += 900 # 15 mins in seconds
@@ -90,12 +91,8 @@ module Tableau
         </td>}
     end
 
-
-
-
     # HTML5 representation of the timetable
     def to_html
-      days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
       time_header, rows = '<th></th>', Array.new
       end_time = Time.new(2013, 1, 1, 21, 0, 0)
 
@@ -108,33 +105,9 @@ module Tableau
 
       #make each day row
       (0..4).each do |day|
-        day_row = "<td class=\"dh\">#{days[day]}</td>"
-        time = Time.new(2013, 1, 1, 9, 0 , 0)
         classes = @timetable.classes_for_day(day)
-
-        if !classes || classes.count == 0
-          while time < end_time
-            day_row += "<td></td>"
-            time += (60 * 15) #15 mins in seconds
-          end
-        else
-          while time < end_time
-            class_at_time = @timetable.class_for_time(day, time)
-            if class_at_time
-              day_row += %Q{
-                <td class="class_item" colspan="#{class_at_time.intervals}">
-                  #{class_at_time.name}
-                </td>}
-              time += (60 * 15 * class_at_time.intervals)
-            else
-              day_row += "<td></td>"
-              time += (60 * 15)
-            end
-          end
-        end
-        rows << day_row
-      end # End the day
-
+        rows << day_row(day, classes)
+      end
 
       rows_str, id_str = '', "id=\"#{@timetable.name}\""
       rows.each{ |r| rows_str += "<tr class=\"day\">\n#{r}\n</tr>\n" }

@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'tableau/parser'
-require 'tableau/class'
 
 describe 'Parser' do
 

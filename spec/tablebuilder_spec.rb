@@ -1,9 +1,4 @@
 require 'spec_helper'
-require 'benchmark'
-
-require 'tableau/tablebuilder'
-require 'tableau/timetable'
-require 'tableau/parser'
 
 describe 'TableBuilder' do
 
@@ -17,8 +12,8 @@ describe 'TableBuilder' do
     @tablebuilder.to_html.should_not be_nil
   end
 
-  it "should complete the HTML render in under 10ms" do
-    Benchmark.realtime{ @tablebuilder.to_html }.should < 0.01
+  it "should complete the HTML render in under 100ms" do
+    Benchmark.realtime{ @tablebuilder.to_html }.should < 0.1
   end
 
 end
