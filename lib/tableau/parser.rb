@@ -31,14 +31,13 @@ module Tableau
     end
 
     def get_info
-      raw_info = @raw_timetable.xpath(@@COURSE_DESCRIPTION_XPATH).to_html
-      mod_id = @@MODULE_ID_REGEX.match(raw_info).to_s
-      mod_name = raw_info.gsub(mod_id, '')
+      mod = parse_module
+      types = Set.new
 
-      return {
-        name: mod_name,
-        code: mod_id
-      }
+      # Get class types sans-Lec type
+      mod.classes.each { |c| types.add?(c.type) }
+
+      return { name: mod.name, code: mod.module_id, types: types }
     end
 
     def parse_module

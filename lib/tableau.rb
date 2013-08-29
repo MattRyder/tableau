@@ -12,6 +12,7 @@ module Tableau
       builder.to_html
     end
 
+    # Return the Name, Code and Types (2Prac / PracA / PracB etc) from the timetable
     def module_info(module_code, semester)
       parser = Tableau::Parser.new(module_code, semester)
       parser.get_info
