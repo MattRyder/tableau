@@ -4,9 +4,8 @@ module Tableau
     attr_accessor :name, :modules
 
     # Create a new Timetable, with a Timetable Name and Student Set ID
-    def initialize(timetable_name, timetable_lookup_id)
-
-    end
+    #def initialize(timetable_name, timetable_lookup_id)
+    #end
 
 
     # Create a new Timetable, with a name and an array of Module Codes (optional)
@@ -19,7 +18,7 @@ module Tableau
 
     # Adds a Module to the Timetable via the Parser
     def add_module(module_code, semester)
-      @module = Tableau::Parser.new(module_code, semester).parse_module
+      @module = Tableau::ModuleParser.new(module_code).parse
       @modules << @module if @module
     end
 
