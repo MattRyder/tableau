@@ -26,11 +26,11 @@ describe 'Module' do
 
   context "when accessing data attributes" do
     before do
-      @module = Tableau::Parser.new('CE00952-5', 2).parse_module
+      @module = Tableau::ModuleParser.new('CE00952-5').parse
     end
 
     it "should have an earliest class of 9AM" do
-      @module.earliest_class.time.should eq(Time.new(2013, 1, 1, 9, 0, 0))
+      @module.earliest_class.time.should eq(Time.new(2013, 1, 1, 12, 0, 0))
     end
 
     it "should have a latest class of 4PM" do

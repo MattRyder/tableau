@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "ClassArray" do
 
   before do
-    mod = Tableau::Parser.new('CE61006-4', 1).parse_module
+    mod = Tableau::ModuleParser.new('CE00748-3').parse
     @array = Tableau::ClassArray.new
     @array.concat(mod.classes)
   end
@@ -21,9 +21,9 @@ describe "ClassArray" do
     earliest_class.time.should eq(Time.new(2013, 1, 1, 9, 0, 0))
   end
 
-  it "should have a latest class of 5PM" do
+  it "should have a latest class of 1PM" do
     latest_class = @array.latest_class
-    latest_class.time.should eq(Time.new(2013, 1, 1, 17, 0, 0))
+    latest_class.time.should eq(Time.new(2013, 1, 1, 13, 0, 0))
   end
 
 end
