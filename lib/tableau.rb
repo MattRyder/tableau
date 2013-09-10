@@ -1,6 +1,6 @@
 require 'json'
 require 'tableau/timetable'
-require 'tableau/parser'
+require 'tableau/moduleparser'
 require 'tableau/tablebuilder'
 
 module Tableau

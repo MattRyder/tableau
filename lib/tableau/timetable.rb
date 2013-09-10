@@ -3,11 +3,18 @@ module Tableau
 
     attr_accessor :name, :modules
 
-    def initialize(name, module_codes = {}, semester = 1)
+    # Create a new Timetable, with a Timetable Name and Student Set ID
+    def initialize(timetable_name, timetable_lookup_id)
+
+    end
+
+
+    # Create a new Timetable, with a name and an array of Module Codes (optional)
+    def initialize(name, module_codes = {})
       @name = name || ''
       @modules = Array.new
 
-      add_modules(module_codes, semester) if module_codes
+      add_modules(module_codes, ENV["TABLEAU_SEMESTER"]) if module_codes
     end
 
     # Adds a Module to the Timetable via the Parser
@@ -43,7 +50,7 @@ module Tableau
       classes.count > 0 ? classes : nil
     end
 
-    # Returns the class at the given day & time or nil if nothing
+    # Returns the class at the given day & time
     def class_for_time(day, time)
       cfd = self.classes_for_day(day)
       cfd.each { |c| return c if c.time == time }
