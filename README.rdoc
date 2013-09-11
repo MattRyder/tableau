@@ -1,19 +1,33 @@
-= Tableau
+Tableau
+=========
 
-Parses, analyses and creates Timetables for Staffordshire University students.
+Tableau is a Ruby on Rails Gem that parses, analyses and creates timetables for Staffordshire University students, by using the latest live data available. It currently has the ability to parse both 'student set' timetables (aka 'Core Timetables'), as well as individual Module timetables.
 
-== Installing Tableau
+The parser is built upon a single BaseParser class, so if the University has data, it's likely Tableau can be expanded to retrieve it!
 
-To install Tableau to your project, include it in your `Gemfile`.
+Installing Tableau on Rails 4
+--------------------
+In your Gemfile, include:
+``` ruby
+gem 'tableau'
+```
 
-== Developing Tableau
+Or pull the latest build from the master branch:
 
-To develop the gem further, fork and clone to your local machine, then run:
+``` ruby
+gem 'tableau', git: 'http://github.com/MattRyder/tableau.git'
+```
 
-` mkdir /spec/dummy/db; rake db:create `
+and run bundle install.
 
-to create the databases for RSpec.
+Developing Tableau
+--------------------
 
-Ensure your changes are working and accompanied by a test suite before issuing a pull request.
+To develop for Tableau, I invite you to make some changes to the gem, and send me a pull request!
 
-(c) Matt Ryder 2013, MIT Licenced.
+All I ask is that if you develop any new features, you include a similar test scheme as seen in existing parts of the gem (or better! :smile:) and if the tests pass, there's little preventing a merge!
+
+
+Licence
+-------------------
+MIT Licence, see LICENCE for more details on that.

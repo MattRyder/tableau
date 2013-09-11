@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Matt Ryder"]
   s.email       = ["matt@mattryder.co.uk"]
   s.homepage    = "http://www.github.com/MattRyder/tableau"
-  s.summary     = "Parses HTML Table data"
-  s.description = s.summary
+  s.summary     = "Parses, analyses and creates Timetables for Staffordshire University students."
+  s.description = s.summary << "Handles both Course and individual Module timetables."
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
