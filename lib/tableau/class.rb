@@ -2,7 +2,8 @@ module Tableau
   class Class
 
     attr_accessor :type, :location, :name, :tutor,
-                  :day, :time, :intervals, :weeks
+                  :day, :time, :intervals, :weeks,
+                  :code
 
     def defaults
       def_opts = {
@@ -11,7 +12,8 @@ module Tableau
         name: '',
         tutor: '',
         intervals: 4,
-        day: 0,
+        day:  0,
+        code: 0,
         time: Time.new
       }
     end

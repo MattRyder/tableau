@@ -16,8 +16,8 @@ describe 'Timetable' do
   context "with one module" do
 
     before do
-      modules = ['CE00341-5']
-      @timetable = Tableau::Timetable.new("Test Timetable", modules, 2)
+      @timetable = Tableau::Timetable.new("Test Timetable")
+      @timetable.add_module('CE00341-5')
       @firstclass = @timetable.modules.first.classes.first
     end
 
@@ -30,23 +30,23 @@ describe 'Timetable' do
     end
 
     it "should have a class with the correct attributes" do
-      @firstclass.tutor.should eq("Sharp B")
+      @firstclass.tutor.should eq("Sharp B, Roberts P")
       @firstclass.location.should eq("C346")
       @firstclass.type.should eq("Lec")
       @firstclass.name.should eq("AI Methods")
     end
 
     it "should have a class at the correct time" do
-      @firstclass.day.should eq(2)
-      @firstclass.time.should == Time.new(2013, 1, 1, 10, 0, 0)
+      @firstclass.day.should eq(1)
+      @firstclass.time.should == Time.new(2013, 1, 1, 13, 0, 0)
     end
   end
 
   context "with conflicting modules" do
 
     before do
-      modules = ['CE70046-4', 'CE70031-4']
-      @timetable = Tableau::Timetable.new("Test Timetable", modules, 2)
+      @timetable = Tableau::Timetable.new("Test Timetable")
+      @timetable.add_modules(['CE70046-4', 'CE70031-4'])
       @conflicts = @timetable.conflicts
     end
 

@@ -63,15 +63,15 @@ describe 'ModuleParser' do
     end
 
     it "should have a class with the correct attributes" do
-      @classes.first.tutor.should eq("Sharp B")
+      @classes.first.tutor.should eq("Sharp B, Roberts P")
       @classes.first.location.should eq("C346")
       @classes.first.type.should eq("Lec")
       @classes.first.name.should eq("AI Methods")
     end
 
     it "should have a class at the correct time" do
-      @classes.first.day.should eq(2)
-      @classes.first.time.should == Time.new(2013, 1, 1, 10, 0, 0)
+      @classes.first.day.should eq(1)
+      @classes.first.time.should == Time.new(2013, 1, 1, 13, 0, 0)
     end
 
     it "should return the correct module information" do

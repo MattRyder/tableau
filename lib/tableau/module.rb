@@ -4,12 +4,10 @@ module Tableau
     attr_reader :module_id, :name, :classes
 
     def initialize(id, options = {})
-
-      if validate_id(id); @module_id = id
-      else raise "Module Code #{id} is invalid!"; end
+      @module_id = id
 
       @name    = options[:name] || ''
-      @classes = options[:classes] || Array.new
+      @classes = options[:classes] || Tableau::ClassArray.new
     end
 
     # Add a class to the module
@@ -37,9 +35,6 @@ module Tableau
       @classes.each { |c| latest = c if c.time > latest.time }
       latest
     end
-
-    # Validates whether an ID follows the naming scheme
-    def validate_id(id); /^(CE|ce)[0-9]{5}-[0-9]$/ =~ id; end
 
   end
 end

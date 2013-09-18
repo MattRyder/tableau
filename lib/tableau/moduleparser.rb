@@ -1,11 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
 require 'tableau/baseparser'
-require 'tableau/timetable'
-require 'tableau/module'
-require 'tableau/class'
-require 'tableau/uribuilder'
-require 'tableau/classarray'
 
 module Tableau
   class ModuleParser < Tableau::BaseParser
@@ -44,43 +39,12 @@ module Tableau
 
       # Iterate through each timetable until xpath returns no more timetable tables
       while !table_data.empty?
-        tables_classes = parse_table(module_id, table_data)
+        tables_classes = parse_table(table_data)
         tables_classes.each { |c| mod.classes << c }
-        table_count += 1
+        table_data = @raw_timetable.xpath(xpath_for_table(table_count += 1))
       end
 
       mod #return the module to the caller
-    end
-
-    # Parse the module table for any classes
-    def parse_table(module_id, table_rows)
-      classes = Tableau::ClassArray.new
-      @day = 0
-
-      # delete the time header row
-      table_rows.delete(table_rows.first)
-
-      table_rows.each do |row|
-        @time = Time.new(2013, 1, 1, 9, 0, 0)
-
-        # drop the 'Day' cell from the row
-        row_items = row.xpath('td')
-        row_items.delete(row_items.first)
-
-        row_items.each do |cell|
-          if cell.attribute('colspan')
-            intervals = cell.attribute('colspan').value
-            classes << create_class(module_id, cell)
-          else intervals = 1
-          end
-
-          inc_time(intervals)
-        end
-
-        @day += 1
-      end
-
-      classes
     end
 
   end

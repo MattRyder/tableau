@@ -4,27 +4,25 @@ module Tableau
     attr_accessor :name, :modules
 
     # Create a new Timetable, with a Timetable Name and Student Set ID
-    #def initialize(timetable_name, timetable_lookup_id)
-    #end
-
-
-    # Create a new Timetable, with a name and an array of Module Codes (optional)
-    def initialize(name, module_codes = {})
-      @name = name || ''
+    def initialize(timetable_name)
+      @name = name || "Timetable"
       @modules = Array.new
+    end
 
-      add_modules(module_codes, ENV["TABLEAU_SEMESTER"]) if module_codes
+    # Pushes an existing module into the timetable
+    def push_module(mod)
+      @modules << mod
     end
 
     # Adds a Module to the Timetable via the Parser
-    def add_module(module_code, semester)
+    def add_module(module_code)
       @module = Tableau::ModuleParser.new(module_code).parse
       @modules << @module if @module
     end
 
     # Mass-adds an array of modules objects to the timetable
-    def add_modules(modules, semester)
-      modules.each { |mod| add_module(mod, semester) }
+    def add_modules(modules)
+      modules.each { |mod_code| add_module(mod_code) }
     end
 
     # Removes a class from the timetable
@@ -53,6 +51,18 @@ module Tableau
     def class_for_time(day, time)
       cfd = self.classes_for_day(day)
       cfd.each { |c| return c if c.time == time }
+      nil
+    end
+
+    # Returns the module with given Module Code
+    def module_for_name(module_name)
+      modules.each { |m| return m if m.name }
+      nil
+    end
+
+    # Return the Tableau::Module that matches a given code
+    def module_for_code(mod_code)
+      @modules.each { |m| return m if m.module_id == mod_code } if @modules
       nil
     end
 

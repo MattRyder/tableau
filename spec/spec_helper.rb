@@ -18,6 +18,7 @@ Spork.prefork do
 
   require 'tableau/baseparser'
   require 'tableau/moduleparser'
+  require 'tableau/timetableparser'
 
   require 'tableau/tablebuilder'
   require 'tableau/timetable'

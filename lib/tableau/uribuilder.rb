@@ -28,15 +28,15 @@ module Tableau
     end
 
     def read
-      open(self.to_s){ |io| data = io.read }
+      open(self.to_s){ |io| io.read }
     end
 
     def to_s
-        "http://#{@options[:root]}#{@options[:timetable_type]};#{@options[:lookup_type]};name;" +
-        "#{@lookup_id}?&template=#{@options[:timetable_template].gsub(' ', '%20')}" +
-        "&weeks=#{@options[:weeks]}&days=#{@options[:days]}" +
-        "&periods=#{@options[:period_from]}-#{@options[:period_to]}" +
-        "#{@options[:optional_params]}"
+      "http://#{@options[:root]}#{@options[:timetable_type]};#{@options[:lookup_type]};name;" +
+      "#{@lookup_id}?&template=#{@options[:timetable_template].gsub(' ', '%20')}" +
+      "&weeks=#{@options[:weeks]}&days=#{@options[:days]}" +
+      "&periods=#{@options[:period_from]}-#{@options[:period_to]}" +
+      "#{@options[:optional_params]}"
     end
 
   end
