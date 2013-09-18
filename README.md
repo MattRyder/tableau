@@ -1,6 +1,8 @@
 Tableau
 =========
 
+[![Build Status](https://travis-ci.org/MattRyder/tableau.png)](https://travis-ci.org/MattRyder/tableau)
+
 Tableau is a Ruby on Rails Gem that parses, analyses and creates timetables for Staffordshire University students, by using the latest live data available. It currently has the ability to parse both 'student set' timetables (aka 'Core Timetables'), as well as individual Module timetables.
 
 The parser is built upon a single BaseParser class, so if the University has data, it's likely Tableau can be expanded to retrieve it!
