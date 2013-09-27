@@ -13,6 +13,11 @@ describe "Tableau" do
     @info[:types].should include('2Prac')
   end
 
+  it "should return a Timetable object" do
+    @timetable = Tableau.core_timetable('l3cs')
+    @timetable.class.should eq(Tableau::Timetable)
+  end
+
 =begin SEMESTER 2 TEST - TODO: REPLACE WITH SEM 1 TEST CASE
   it "should return the correct amount of class types" do
     @rts_info[:code].should eq('CE00870-6')
