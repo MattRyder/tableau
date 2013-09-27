@@ -24,7 +24,7 @@ module Tableau
         @options[:timetable_template] = "Module%20Individual%20SOC"
       end
 
-      @options[:weeks] = ENV["TABLEAU_SEMESTER"] == 1 ? '10-25' : '26-42'
+      @options[:weeks] = ENV["TABLEAU_SEMESTER"] == "1" ? '10-25' : '26-42'
     end
 
     def read
